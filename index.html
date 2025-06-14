@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Ultimate</title>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container" role="main">
+        <h1 class="game-title">Tic-Tac-Toe Ultimate</h1>
+
+        <!-- Mode Selection Screen -->
+        <div id="mode-selection" class="screen active" aria-label="Mode Selection">
+            <button class="btn" id="play-friend-btn" aria-label="Play with Friend">
+                <i class="fas fa-user-friends icon" aria-hidden="true"></i> Play with Friend
+            </button>
+            <button class="btn" id="play-ai-btn" aria-label="Play with AI">
+                <i class="fas fa-robot icon" aria-hidden="true"></i> Play with AI
+            </button>
+        </div>
+
+        <!-- Game Setup Screen -->
+        <div id="game-setup" class="screen hidden" aria-label="Game Setup">
+            <!-- Friend Mode Inputs -->
+            <div id="friend-inputs" class="input-group hidden">
+                <div class="input-field">
+                    <label for="playerXName">Player X Name:</label>
+                    <input type="text" id="playerXName" placeholder="Enter Player X name" value="Player X" aria-describedby="playerXNameDesc">
+                    <p id="playerXNameDesc" class="sr-only">Enter the name for Player X.</p>
+                </div>
+                <div class="input-field">
+                    <label for="playerOName">Player O Name:</label>
+                    <input type="text" id="playerOName" placeholder="Enter Player O name" value="Player O" aria-describedby="playerONameDesc">
+                    <p id="playerONameDesc" class="sr-only">Enter the name for Player O.</p>
+                </div>
+            </div>
+
+            <!-- AI Mode Difficulty Selection & Player Mark Choice -->
+            <div id="ai-options" class="ai-options-group hidden">
+                <div id="ai-difficulty" class="difficulty-group">
+                    <label for="difficulty-options">Choose AI Difficulty:</label>
+                    <div class="difficulty-options" id="difficulty-options" role="radiogroup" aria-label="AI Difficulty Selection">
+                        <button class="difficulty-btn selected" data-difficulty="easy" role="radio" aria-checked="true" title="Easy: AI makes random moves">Easy</button>
+                        <button class="difficulty-btn" data-difficulty="medium" role="radio" aria-checked="false" title="Medium: AI blocks wins and tries to win">Medium</button>
+                        <button class="difficulty-btn" data-difficulty="hard" role="radio" aria-checked="false" title="Hard: AI plays strategically (center, corners)">Hard</button>
+                    </div>
+                </div>
+
+                <div id="player-mark-choice" class="player-mark-group">
+                    <label for="player-choice-options">Play as:</label>
+                    <div class="player-choice-options" id="player-choice-options" role="radiogroup" aria-label="Player Mark Selection">
+                        <button class="player-choice-btn selected" data-player-mark="X" role="radio" aria-checked="true">X</button>
+                        <button class="player-choice-btn" data-player-mark="O" role="radio" aria-checked="false">O</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn start-btn" id="start-game-btn" aria-label="Start Game">
+                <i class="fas fa-play icon" aria-hidden="true"></i> Start Game
+            </button>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="game-screen" class="screen hidden" aria-label="Game Screen">
+            <div class="game-info">
+                <div class="scoreboard-container" aria-live="polite">
+                    <div class="score-card player-x-score">
+                        <span id="displayPlayerXName">Player X</span>: <span id="scoreX">0</span>
+                    </div>
+                    <div class="score-card player-o-score">
+                        <span id="displayPlayerOName">Player O</span>: <span id="scoreO">0</span>
+                    </div>
+                </div>
+
+                <div class="turn-timer-container">
+                    <div class="turn-indicator" aria-live="polite">
+                        <span id="turnText"></span>'s Turn
+                        <span id="ai-thinking" class="hidden"> (AI is thinking...)</span>
+                    </div>
+                    <div class="timer" aria-live="assertive">
+                        Time Left: <span id="timerDisplay">60</span>s
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-board" class="game-board" role="grid" aria-label="Tic-Tac-Toe Board">
+                <!-- Cells will be dynamically created by JavaScript -->
+            </div>
+            <button class="btn back-to-menu-btn" id="back-from-game-btn" aria-label="Back to Main Menu">
+                <i class="fas fa-arrow-left icon" aria-hidden="true"></i> Back to Main Menu
+            </button>
+        </div>
+    </div>
+
+    <!-- Game End Modal -->
+    <div id="game-end-modal" class="modal" role="dialog" aria-labelledby="modal-message" aria-hidden="true">
+        <div class="modal-content">
+            <h2 id="modal-message" aria-live="assertive"></h2>
+            <div class="modal-buttons">
+                <button class="btn modal-replay-btn" id="replay-btn" aria-label="Replay Game">
+                    <i class="fas fa-redo-alt icon" aria-hidden="true"></i> Replay
+                </button>
+                <button class="btn modal-exit-btn" id="exit-btn" aria-label="Exit to Main Menu">
+                    <i class="fas fa-sign-out-alt icon" aria-hidden="true"></i> Exit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="script.js"></script>
+</body>
+</html>
